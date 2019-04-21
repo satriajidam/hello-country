@@ -1,6 +1,6 @@
 FROM golang:1.11.5-alpine3.9 as builder
 
-ENV SRC_DIR="/go/src/github.com/satriajidam/countryname"
+ENV SRC_DIR="/go/src/github.com/satriajidam/hello-country"
 
 # Install tools & packages required to build the project.
 # We will need to run `docker build --no-cache .` to update those dependencies.
@@ -19,10 +19,10 @@ RUN dep ensure --vendor-only
 # Copy all source and build it.
 # This layer will be rebuilt whenever a file has changed in the source directory.
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -i -a -v -installsuffix nocgo -o /bin/countryname .
+RUN CGO_ENABLED=0 GOOS=linux go build -i -a -v -installsuffix nocgo -o /bin/hello-country .
 
 # Build final image.
 FROM gcr.io/distroless/static
 WORKDIR /app
-COPY --from=builder /bin/countryname countryname
-ENTRYPOINT ["./countryname"]
+COPY --from=builder /bin/hello-country hello-country
+ENTRYPOINT ["./hello-country"]
