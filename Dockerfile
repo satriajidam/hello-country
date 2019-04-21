@@ -24,6 +24,5 @@ RUN CGO_ENABLED=0 GOOS=linux go build -i -a -v -installsuffix nocgo -o /bin/coun
 # Build final image.
 FROM gcr.io/distroless/static
 WORKDIR /app
-COPY dockerfiles dockerfiles
 COPY --from=builder /bin/countryname countryname
 ENTRYPOINT ["./countryname"]
