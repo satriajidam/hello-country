@@ -24,7 +24,7 @@ func main() {
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(
-			fmt.Sprintf("Hello from %s!", country),
+			fmt.Sprintf("Hola amigos, somos de %s!", country),
 		))
 	})
 
